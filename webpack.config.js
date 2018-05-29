@@ -6,15 +6,20 @@ var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     mode: devMode ? "development" : "production",
     entry: {
-        pixi: "./node_modules/pixi.js/dist/pixi.js",
         main: "./src/script/main",
         style: "./src/script/style",
     },
     module: {
-        noParse: [
-            /.*(pixi\.js).*/
-        ],
         rules: [
+            {
+                test: /\.min\.js$/,
+                use: [{
+                    loader: "file-loader",
+                    options: {
+                        name: "js/[name].[ext]"
+                    }
+                }]
+            },
             {
                 test: /\.ts$/,
                 use: "ts-loader",
@@ -46,7 +51,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(svg|png|jpg|jpeg|gif|ttf|eot|woff)$/,
+                test: /\.(svg|png|jpg|jpeg|gif|ttf|eot)$/,
                 exclude: /node_modules/,
                 use: [{
                     loader: 'file-loader',
