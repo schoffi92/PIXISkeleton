@@ -11,6 +11,9 @@ module.exports = {
         style: "./src/script/style",
     },
     module: {
+        noParse: [
+            /.*(pixi\.js).*/
+        ],
         rules: [
             {
                 test: /\.ts$/,
@@ -43,14 +46,23 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpg|jpeg|gif|ttf|eot)$/,
+                test: /\.(svg|png|jpg|jpeg|gif|ttf|eot|woff)$/,
                 exclude: /node_modules/,
-                loader: 'url-loader?limit=10240'
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: 'resources/[name].[ext]'
+                    }
+                }]
+            },
+            {
+                test: /\.json$/,
+                use: "json-loader",
             }
         ]
     },
     resolve: {
-        extensions: ['.ts', '.js'],
+        extensions: ['.ts', '.js', '.json'],
     },
     output: {
         filename: 'js/[name].js',
