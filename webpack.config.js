@@ -41,6 +41,11 @@ module.exports = {
                     MiniCssExtractPlugin.loader,
                     "css-loader"
                 ]
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif|ttf|eot)$/,
+                exclude: /node_modules/,
+                loader: 'url-loader?limit=10240'
             }
         ]
     },
