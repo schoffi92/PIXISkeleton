@@ -6,6 +6,7 @@ This skeleton uses the following solutions/technologies:
 * SASS
 * PUG
 * TSLint
+* Webpack
 
 # Test Lint
 
